@@ -16,14 +16,13 @@ import java.util.Date;
 @Setter
 @Table(name = "available_slots")
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class Slot extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(name = "start_time",nullable = false)
     private Date start;
-    @Column(nullable = false)
+    @Column(name = "end_time",nullable = false)
     private Date end;
+    @Column(nullable = false)
     private Boolean isReserved;
     @Version
     @Column(nullable = false)
