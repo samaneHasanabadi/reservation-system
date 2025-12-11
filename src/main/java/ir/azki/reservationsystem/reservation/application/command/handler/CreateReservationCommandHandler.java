@@ -6,6 +6,7 @@ import ir.azki.reservationsystem.reservation.domain.ReservationRepository;
 import ir.azki.reservationsystem.slot.domain.Slot;
 import ir.azki.reservationsystem.slot.domain.SlotRepository;
 import ir.azki.reservationsystem.user.infrastructure.security.AuthenticatedUserProvider;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class CreateReservationCommandHandler {
     private final SlotRepository slotRepository;
     private final AuthenticatedUserProvider authenticatedUserProvider;
 
+    @Transactional
     public void handle(CreateReservationCommand command) throws AccessDeniedException {
         Slot slot = slotRepository.findById(command.slotId()).orElseThrow(() -> new IllegalArgumentException("slot not found with id : " + command.slotId()));
 

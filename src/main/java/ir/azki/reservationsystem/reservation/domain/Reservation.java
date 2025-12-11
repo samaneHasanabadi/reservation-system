@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 public class Reservation extends BaseEntity {
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "slotId", nullable = false)
     private Slot slot;
     @ManyToOne

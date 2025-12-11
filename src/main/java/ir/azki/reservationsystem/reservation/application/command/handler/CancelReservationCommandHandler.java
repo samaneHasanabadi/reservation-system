@@ -6,6 +6,7 @@ import ir.azki.reservationsystem.slot.domain.Slot;
 import ir.azki.reservationsystem.slot.domain.SlotRepository;
 import ir.azki.reservationsystem.user.domain.User;
 import ir.azki.reservationsystem.user.infrastructure.security.AuthenticatedUserProvider;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class CancelReservationCommandHandler {
     private final SlotRepository slotRepository;
     private final AuthenticatedUserProvider authenticatedUserProvider;
 
+    @Transactional
     public void handle(Long id) throws AccessDeniedException {
         Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("reservation not found with id : " + id));
         User currentUser = authenticatedUserProvider.getCurrentUser();
