@@ -24,21 +24,21 @@ public class SlotCommandController {
     private final DeleteSlotCommandHandler deleteSlotCommandHandler;
     private final ConversionService conversionService;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<String> register(@Valid @RequestBody CreateSlotRequest request) {
         CreateSlotCommand convert = conversionService.convert(request, CreateSlotCommand.class);
         createSlotCommandHandler.handle(convert);
         return ResponseEntity.status(HttpStatus.CREATED).body("Slot is successfully created");
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping
     public ResponseEntity<String> updateBudget(@PathVariable Long id, @Valid @RequestBody CreateSlotRequest request) throws AccessDeniedException {
         CreateSlotCommand command = conversionService.convert(request, CreateSlotCommand.class);
         updateSlotCommandHandler.handle(id, command);
         return ResponseEntity.ok().body("Slot is updated successfully!");
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping
     public ResponseEntity<String> deleteBudget(@PathVariable Long id) {
         deleteSlotCommandHandler.handle(id);
         return ResponseEntity.ok().body("Slot is deleted successfully!");
