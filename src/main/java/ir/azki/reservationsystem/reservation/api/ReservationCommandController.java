@@ -1,5 +1,6 @@
 package ir.azki.reservationsystem.reservation.api;
 
+import ir.azki.reservationsystem.reservation.api.resources.CreateReservationRequest;
 import ir.azki.reservationsystem.reservation.application.command.CreateReservationCommand;
 import ir.azki.reservationsystem.reservation.application.command.handler.CancelReservationCommandHandler;
 import ir.azki.reservationsystem.reservation.application.command.handler.CreateReservationCommandHandler;

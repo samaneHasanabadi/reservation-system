@@ -1,4 +1,4 @@
-package ir.azki.reservationsystem.reservation.api;
+package ir.azki.reservationsystem.reservation.api.resources;
 
 import ir.azki.reservationsystem.reservation.application.command.CreateReservationCommand;
 import org.jspecify.annotations.Nullable;

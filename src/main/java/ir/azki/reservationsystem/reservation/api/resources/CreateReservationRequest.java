@@ -1,4 +1,4 @@
-package ir.azki.reservationsystem.reservation.api;
+package ir.azki.reservationsystem.reservation.api.resources;
 
 import jakarta.validation.constraints.NotNull;
 
