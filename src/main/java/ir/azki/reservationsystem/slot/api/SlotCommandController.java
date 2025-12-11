@@ -1,10 +1,10 @@
 package ir.azki.reservationsystem.slot.api;
 
 import ir.azki.reservationsystem.slot.api.resources.CreateSlotRequest;
-import ir.azki.reservationsystem.slot.application.CreateSlotCommand;
-import ir.azki.reservationsystem.slot.application.handler.CreateSlotCommandHandler;
-import ir.azki.reservationsystem.slot.application.handler.DeleteSlotCommandHandler;
-import ir.azki.reservationsystem.slot.application.handler.UpdateSlotCommandHandler;
+import ir.azki.reservationsystem.slot.application.command.CreateSlotCommand;
+import ir.azki.reservationsystem.slot.application.command.handler.CreateSlotCommandHandler;
+import ir.azki.reservationsystem.slot.application.command.handler.DeleteSlotCommandHandler;
+import ir.azki.reservationsystem.slot.application.command.handler.UpdateSlotCommandHandler;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.ConversionService;

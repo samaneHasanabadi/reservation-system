@@ -1,5 +1,6 @@
 package ir.azki.reservationsystem.slot.domain;
 
+import ir.azki.reservationsystem.slot.application.dto.SlotDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
