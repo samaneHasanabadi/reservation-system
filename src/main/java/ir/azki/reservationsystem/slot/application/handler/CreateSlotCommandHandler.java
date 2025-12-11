@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CreateCommandHandler {
+public class CreateSlotCommandHandler {
 
     private final SlotRepository slotRepository;
 
