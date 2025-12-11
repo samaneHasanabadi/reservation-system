@@ -5,11 +5,15 @@ import ir.azki.reservationsystem.slot.domain.Slot;
 import ir.azki.reservationsystem.user.domain.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Reservation extends BaseEntity {
 
     @OneToOne
