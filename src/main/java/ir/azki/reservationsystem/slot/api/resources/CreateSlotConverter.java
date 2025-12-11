@@ -1,6 +1,6 @@
 package ir.azki.reservationsystem.slot.api.resources;
 
-import ir.azki.reservationsystem.slot.application.CreateSlotCommand;
+import ir.azki.reservationsystem.slot.application.command.CreateSlotCommand;
 import org.jspecify.annotations.Nullable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

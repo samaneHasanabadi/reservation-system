@@ -1,4 +1,4 @@
-package ir.azki.reservationsystem.slot.application.handler;
+package ir.azki.reservationsystem.slot.application.command.handler;
 
 import ir.azki.reservationsystem.slot.domain.SlotRepository;
 import jakarta.transaction.Transactional;

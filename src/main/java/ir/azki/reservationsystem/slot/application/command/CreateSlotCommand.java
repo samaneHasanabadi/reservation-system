@@ -1,4 +1,4 @@
-package ir.azki.reservationsystem.slot.application;
+package ir.azki.reservationsystem.slot.application.command;
 
 import jakarta.validation.constraints.NotNull;
 
