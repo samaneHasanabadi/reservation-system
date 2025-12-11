@@ -33,4 +33,4 @@ server:
   shutdown: immediate
   port: 8080
   servlet:
-    context-path: /reservation-system/
+    context-path: /reservation-system
