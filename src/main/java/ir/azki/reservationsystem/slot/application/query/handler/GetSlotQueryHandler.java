@@ -19,9 +19,6 @@ public class GetSlotQueryHandler {
 
     public List<SlotDTO> handle(GetSlotQuery query) {
         Pageable pageable = PageRequest.of(query.page(), query.size());
-        return slotRepository.findAll(pageable).stream()
-                .filter(s -> query.isReserved() == null || s.getIsReserved() != null && s.getIsReserved().equals(query.isReserved()))
-                .map(s -> new SlotDTO(s.getStart(), s.getEnd(), s.getIsReserved()))
-                .collect(Collectors.toList());
+        return slotRepository.findAll(query.isReserved(), pageable).stream().toList();
     }
 }

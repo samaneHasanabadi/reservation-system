@@ -11,11 +11,12 @@ import java.util.Optional;
 public interface SlotRepository {
 
     Slot save(Slot slot);
+
     List<Slot> findOverlappedSlots(Date start, Date end);
 
     Optional<Slot> findById(Long id);
 
     void deleteById(Long slotId);
 
-    Page<Slot> findAll(Pageable page);
+    Page<SlotDTO> findAll(Boolean isReserved, Pageable page);
 }
