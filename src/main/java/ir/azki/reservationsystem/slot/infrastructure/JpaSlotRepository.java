@@ -1,0 +1,16 @@
+package ir.azki.reservationsystem.slot.infrastructure;
+
+import ir.azki.reservationsystem.slot.domain.Slot;
+import ir.azki.reservationsystem.slot.domain.SlotRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.Date;
+import java.util.List;
+
+public interface JpaSlotRepository extends SlotRepository, JpaRepository<Slot, Long> {
+
+    @Query("select s from Slot s where (s.start < :end and s.start >= :start) or (s.end > :start and s.end <= :end) ")
+    List<Slot> findOverlappedSlots(Date start, Date end);
+
+}
