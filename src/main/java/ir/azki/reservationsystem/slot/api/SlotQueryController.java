@@ -18,6 +18,7 @@ import java.util.List;
 public class SlotQueryController {
 
     private final GetSlotQueryHandler getSlotQueryHandler;
+
     @GetMapping
     public ResponseEntity<List<SlotDTO>> getSlots(@RequestParam(required = false) Boolean isReserved,
                                                   @RequestParam(defaultValue = "0") int page,

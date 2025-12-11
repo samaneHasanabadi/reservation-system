@@ -5,9 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
@@ -18,9 +16,9 @@ import java.util.Date;
 @Entity
 public class Slot extends BaseEntity {
 
-    @Column(name = "start_time",nullable = false)
+    @Column(name = "start_time", nullable = false)
     private Date start;
-    @Column(name = "end_time",nullable = false)
+    @Column(name = "end_time", nullable = false)
     private Date end;
     @Column(nullable = false)
     private Boolean isReserved;

@@ -15,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
 @Configuration
 @RequiredArgsConstructor
@@ -29,9 +28,9 @@ public class SecurityConfig {
                 .securityMatcher("/reservation-system/**")
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/api/user/register", "/api/user/login", "/h2-console/**").permitAll()
-                        .requestMatchers("/api/reservations/**").authenticated()
-                        .requestMatchers("/api/user/logout").authenticated()
-                        .anyRequest().authenticated()
+                                .requestMatchers("/api/reservations/**").authenticated()
+                                .requestMatchers("/api/user/logout").authenticated()
+                                .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .logout(logout -> logout.logoutUrl("/api/user/logout")
