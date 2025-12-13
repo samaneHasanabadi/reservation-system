@@ -1,5 +1,7 @@
 package ir.azki.reservationsystem.slot.application.command.handler;
 
+import ir.azki.reservationsystem.common.exception.EntityNotFoundException;
+import ir.azki.reservationsystem.slot.domain.Slot;
 import ir.azki.reservationsystem.slot.domain.SlotRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +17,7 @@ public class DeleteSlotCommandHandler {
     @Transactional
     @CacheEvict(value = "free-slots", key = "'first'")
     public void handle(Long id) {
-        slotRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("slot not found with id : " + id));
+        slotRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Slot.class.getSimpleName(), id));
         slotRepository.deleteById(id);
     }
 

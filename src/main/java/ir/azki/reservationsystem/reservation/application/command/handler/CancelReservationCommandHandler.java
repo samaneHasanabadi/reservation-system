@@ -1,5 +1,8 @@
 package ir.azki.reservationsystem.reservation.application.command.handler;
 
+import ir.azki.reservationsystem.common.exception.EntityNotFoundException;
+import ir.azki.reservationsystem.common.exception.ReservationAlreadyCanceledException;
+import ir.azki.reservationsystem.common.exception.UnauthorizedReservationAccessException;
 import ir.azki.reservationsystem.reservation.domain.Reservation;
 import ir.azki.reservationsystem.reservation.domain.ReservationRepository;
 import ir.azki.reservationsystem.slot.domain.Slot;
@@ -24,13 +27,13 @@ public class CancelReservationCommandHandler {
     @Transactional
     @CacheEvict(value = "free-slots", key = "'first'")
     public void handle(Long id) throws AccessDeniedException {
-        Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("reservation not found with id : " + id));
+        Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Reservation.class.getSimpleName(), id));
         User currentUser = authenticatedUserProvider.getCurrentUser();
         if (!currentUser.getId().equals(reservation.getUser().getId()))
-            throw new AccessDeniedException("you have no permission to cancel this reservation");
+            throw new UnauthorizedReservationAccessException(id);
 
         if (reservation.getIsCanceled())
-            throw new IllegalArgumentException("reservation is canceled already");
+            throw new ReservationAlreadyCanceledException();
 
         Slot slot = reservation.getSlot();
 

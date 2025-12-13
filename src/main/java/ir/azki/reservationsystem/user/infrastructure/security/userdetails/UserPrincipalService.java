@@ -18,7 +18,7 @@ public class UserPrincipalService implements UserDetailsService {
     @Override
     @Cacheable(value = "user")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("user not found with username " + username));
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
         return new UserPrincipal(user);
     }
 

@@ -1,5 +1,7 @@
 package ir.azki.reservationsystem.reservation.application.command.handler;
 
+import ir.azki.reservationsystem.common.exception.EntityNotFoundException;
+import ir.azki.reservationsystem.common.exception.SlotAlreadyReservedException;
 import ir.azki.reservationsystem.reservation.application.command.CreateReservationCommand;
 import ir.azki.reservationsystem.reservation.domain.Reservation;
 import ir.azki.reservationsystem.reservation.domain.ReservationRepository;
@@ -24,10 +26,10 @@ public class CreateReservationCommandHandler {
     @Transactional
     @CacheEvict(value = "free-slots", key = "'first'")
     public void handle(CreateReservationCommand command) throws AccessDeniedException {
-        Slot slot = slotRepository.findById(command.slotId()).orElseThrow(() -> new IllegalArgumentException("slot not found with id : " + command.slotId()));
+        Slot slot = slotRepository.findById(command.slotId()).orElseThrow(() -> new EntityNotFoundException(Slot.class.getSimpleName(), command.slotId()));
 
         if (slot.getIsReserved())
-            throw new RuntimeException("Slot is reserved already");
+            throw new SlotAlreadyReservedException(command.slotId());
 
         Reservation reservation = new Reservation();
         reservation.setSlot(slot);

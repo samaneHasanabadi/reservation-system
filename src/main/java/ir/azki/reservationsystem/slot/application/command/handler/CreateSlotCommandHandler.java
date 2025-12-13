@@ -1,5 +1,7 @@
 package ir.azki.reservationsystem.slot.application.command.handler;
 
+import ir.azki.reservationsystem.common.exception.SlotEndTimeBeforeStartTimeException;
+import ir.azki.reservationsystem.common.exception.TimeSlotsOverlappedException;
 import ir.azki.reservationsystem.slot.application.command.CreateSlotCommand;
 import ir.azki.reservationsystem.slot.domain.Slot;
 import ir.azki.reservationsystem.slot.domain.SlotRepository;
@@ -16,10 +18,10 @@ public class CreateSlotCommandHandler {
     @Transactional
     public void handle(CreateSlotCommand command) {
         if (!command.start().before(command.end()))
-            throw new IllegalArgumentException("Start date must be before end date");
+            throw new SlotEndTimeBeforeStartTimeException();
 
         if (!slotRepository.findOverlappedSlots(command.start(), command.end()).isEmpty())
-            throw new IllegalArgumentException("time slot is overlapped with available time slots");
+            throw new TimeSlotsOverlappedException();
 
         Slot slot = new Slot();
         slot.setStart(command.start());
