@@ -3,7 +3,7 @@ package ir.azki.reservationsystem.slot.api;
 import ir.azki.reservationsystem.slot.application.dto.SlotDTO;
 import ir.azki.reservationsystem.slot.application.query.GetFirstFreeSlotsQuery;
 import ir.azki.reservationsystem.slot.application.query.GetSlotQuery;
-import ir.azki.reservationsystem.slot.application.query.handler.GetFirstFreeSlotQueryHandler;
+import ir.azki.reservationsystem.slot.application.query.handler.GetFirstFreeSlotsQueryHandler;
 import ir.azki.reservationsystem.slot.application.query.handler.GetSlotQueryHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ import java.util.List;
 public class SlotQueryController {
 
     private final GetSlotQueryHandler getSlotQueryHandler;
-    private final GetFirstFreeSlotQueryHandler getFirstFreeSlotQueryHandler;
+    private final GetFirstFreeSlotsQueryHandler getFirstFreeSlotsQueryHandler;
 
     @GetMapping
     public ResponseEntity<List<SlotDTO>> getSlots(@RequestParam(required = false) Boolean isReserved,
@@ -33,6 +33,6 @@ public class SlotQueryController {
     @GetMapping("/firstFree")
     public ResponseEntity<List<SlotDTO>> getFirstFreeSlots(@RequestParam(defaultValue = "1") int limit) {
         GetFirstFreeSlotsQuery query = new GetFirstFreeSlotsQuery(limit);
-        return ResponseEntity.ok(getFirstFreeSlotQueryHandler.handle(query));
+        return ResponseEntity.ok(getFirstFreeSlotsQueryHandler.handle(query));
     }
 }

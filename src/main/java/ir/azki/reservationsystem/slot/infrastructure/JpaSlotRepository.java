@@ -21,6 +21,6 @@ public interface JpaSlotRepository extends SlotRepository, JpaRepository<Slot, L
     Page<SlotDTO> findAll(Boolean isReserved, Pageable page);
 
     @Query("select new ir.azki.reservationsystem.slot.application.dto.SlotDTO(s.id, s.start, s.end, s.isReserved) from Slot s where s.isReserved = false order by s.start asc")
-    List<SlotDTO> findFirstFreeSlot(Limit of);
+    List<SlotDTO> findFirstFreeSlots(Limit of);
 
 }

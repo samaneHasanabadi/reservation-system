@@ -21,7 +21,7 @@ public interface SlotRepository {
 
     Page<SlotDTO> findAll(Boolean isReserved, Pageable page);
 
-    List<SlotDTO> findFirstFreeSlot(Limit of);
+    List<SlotDTO> findFirstFreeSlots(Limit of);
 
     long count();
 

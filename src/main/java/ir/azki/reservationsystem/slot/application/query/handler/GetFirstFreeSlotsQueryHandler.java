@@ -11,11 +11,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class GetFirstFreeSlotQueryHandler {
+public class GetFirstFreeSlotsQueryHandler {
 
     private final SlotRepository slotRepository;
 
     public List<SlotDTO> handle(GetFirstFreeSlotsQuery query) {
-        return slotRepository.findFirstFreeSlot(Limit.of(query.limit()));
+        return slotRepository.findFirstFreeSlots(Limit.of(query.limit()));
     }
 }
