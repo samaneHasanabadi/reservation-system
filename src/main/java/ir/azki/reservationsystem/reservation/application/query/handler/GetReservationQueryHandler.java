@@ -10,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @Service
@@ -20,7 +19,7 @@ public class GetReservationQueryHandler {
     private final ReservationRepository reservationRepository;
     private final AuthenticatedUserProvider authenticatedUserProvider;
 
-    public List<ReservationDTO> handle(GetReservationQuery query) throws AccessDeniedException {
+    public List<ReservationDTO> handle(GetReservationQuery query) {
         User currentUser = authenticatedUserProvider.getCurrentUser();
         Pageable pageable = PageRequest.of(query.page(), query.size());
         return reservationRepository.findByUserAndIsCanceled(currentUser, query.isCanceled(), pageable).stream().toList();

@@ -14,8 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.AccessDeniedException;
-
 @Service
 @RequiredArgsConstructor
 public class CancelReservationCommandHandler {
@@ -26,7 +24,7 @@ public class CancelReservationCommandHandler {
 
     @Transactional
     @CacheEvict(value = "free-slots", key = "'first'")
-    public void handle(Long id) throws AccessDeniedException {
+    public void handle(Long id) {
         Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Reservation.class.getSimpleName(), id));
         User currentUser = authenticatedUserProvider.getCurrentUser();
         if (!currentUser.getId().equals(reservation.getUser().getId()))

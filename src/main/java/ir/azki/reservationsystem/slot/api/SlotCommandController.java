@@ -14,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.AccessDeniedException;
-
 @RestController
 @RequestMapping("/api/slot")
 @RequiredArgsConstructor
@@ -37,7 +35,7 @@ public class SlotCommandController {
 
     @PutMapping("/{id}")
     @Operation(summary = "update a slot")
-    public ResponseEntity<String> updateBudget(@PathVariable Long id, @Valid @RequestBody CreateSlotRequest request) throws AccessDeniedException {
+    public ResponseEntity<String> updateBudget(@PathVariable Long id, @Valid @RequestBody CreateSlotRequest request) {
         CreateSlotCommand command = conversionService.convert(request, CreateSlotCommand.class);
         updateSlotCommandHandler.handle(id, command);
         return ResponseEntity.ok().body("Slot is updated successfully!");

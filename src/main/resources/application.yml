@@ -39,4 +39,3 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui
-  paths-to-match: /reservation-system/api/**

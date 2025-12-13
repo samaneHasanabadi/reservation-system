@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @RestController
@@ -27,7 +26,7 @@ public class ReservationQueryController {
     @Operation(summary = "get free slots")
     public ResponseEntity<List<ReservationDTO>> getSlots(@RequestParam(required = false) Boolean isCanceled,
                                                          @RequestParam(defaultValue = "0") int page,
-                                                         @RequestParam(defaultValue = "10") int size) throws AccessDeniedException {
+                                                         @RequestParam(defaultValue = "10") int size) {
         GetReservationQuery getReservationQuery = new GetReservationQuery(isCanceled, page, size);
         return ResponseEntity.ok(getReservationQueryHandler.handle(getReservationQuery));
     }

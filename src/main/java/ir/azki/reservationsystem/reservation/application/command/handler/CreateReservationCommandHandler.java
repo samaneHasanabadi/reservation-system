@@ -13,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.AccessDeniedException;
-
 @Service
 @RequiredArgsConstructor
 public class CreateReservationCommandHandler {
@@ -25,7 +23,7 @@ public class CreateReservationCommandHandler {
 
     @Transactional
     @CacheEvict(value = "free-slots", key = "'first'")
-    public void handle(CreateReservationCommand command) throws AccessDeniedException {
+    public void handle(CreateReservationCommand command) {
         Slot slot = slotRepository.findById(command.slotId()).orElseThrow(() -> new EntityNotFoundException(Slot.class.getSimpleName(), command.slotId()));
 
         if (slot.getIsReserved())

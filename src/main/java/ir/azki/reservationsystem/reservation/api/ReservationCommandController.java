@@ -13,8 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.AccessDeniedException;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/reservations")
@@ -27,7 +25,7 @@ public class ReservationCommandController {
 
     @PostMapping()
     @Operation(summary = "reserve a slot for the user")
-    public ResponseEntity<String> reserve(@Valid @RequestBody CreateReservationRequest request) throws AccessDeniedException {
+    public ResponseEntity<String> reserve(@Valid @RequestBody CreateReservationRequest request) {
         CreateReservationCommand convert = conversionService.convert(request, CreateReservationCommand.class);
         createReservationCommandHandler.handle(convert);
         return ResponseEntity.status(HttpStatus.CREATED).body("Reservation is successfully created");
@@ -35,7 +33,7 @@ public class ReservationCommandController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "cancel a reservation for the user")
-    public ResponseEntity<String> cancel(@PathVariable Long id) throws AccessDeniedException {
+    public ResponseEntity<String> cancel(@PathVariable Long id) {
         cancelReservationCommandHandler.handle(id);
         return ResponseEntity.status(HttpStatus.CREATED).body("Reservation is canceled successfully");
     }
