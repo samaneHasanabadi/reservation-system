@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Table(name = "available_slots", indexes = @Index(columnList = "isReserved, start_time"))
+@Table(name = "available_slots", indexes = @Index(columnList = "isReserved, start_time, id, end_time"))
 @Entity
 public class Slot extends BaseEntity {
 

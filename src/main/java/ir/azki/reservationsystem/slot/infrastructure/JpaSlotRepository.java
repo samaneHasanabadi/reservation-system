@@ -1,6 +1,7 @@
 package ir.azki.reservationsystem.slot.infrastructure;
 
 import ir.azki.reservationsystem.slot.application.dto.SlotDTO;
+import ir.azki.reservationsystem.slot.application.dto.SlotProjection;
 import ir.azki.reservationsystem.slot.domain.Slot;
 import ir.azki.reservationsystem.slot.domain.SlotRepository;
 import org.springframework.data.domain.Limit;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -20,7 +22,13 @@ public interface JpaSlotRepository extends SlotRepository, JpaRepository<Slot, L
     @Query("select new ir.azki.reservationsystem.slot.application.dto.SlotDTO(s.id, s.start, s.end, s.isReserved) from Slot s where :isReserved is null or s.isReserved = :isReserved")
     Page<SlotDTO> findAll(Boolean isReserved, Pageable page);
 
-    @Query("select new ir.azki.reservationsystem.slot.application.dto.SlotDTO(s.id, s.start, s.end, s.isReserved) from Slot s where s.isReserved = false order by s.start asc")
-    List<SlotDTO> findFirstFreeSlots(Limit of);
+    @Query(
+            value = "SELECT id, start_time AS start, end_time AS \"end\", is_reserved AS isReserved " +
+                    "FROM available_slots " +
+                    "WHERE is_reserved = false " +
+                    "ORDER BY start_time ASC",
+            nativeQuery = true)
+    @Transactional(readOnly = true)
+    List<SlotProjection> findFirstFreeSlots(Pageable pageable);
 
 }

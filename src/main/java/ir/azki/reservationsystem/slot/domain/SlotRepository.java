@@ -1,6 +1,7 @@
 package ir.azki.reservationsystem.slot.domain;
 
 import ir.azki.reservationsystem.slot.application.dto.SlotDTO;
+import ir.azki.reservationsystem.slot.application.dto.SlotProjection;
 import org.springframework.data.domain.Limit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +22,7 @@ public interface SlotRepository {
 
     Page<SlotDTO> findAll(Boolean isReserved, Pageable page);
 
-    List<SlotDTO> findFirstFreeSlots(Limit of);
+    List<SlotProjection> findFirstFreeSlots(Pageable pageable);
 
     long count();
 
