@@ -34,3 +34,9 @@ server:
   port: 8080
   servlet:
     context-path: /reservation-system
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui
+  paths-to-match: /reservation-system/api/**

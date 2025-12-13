@@ -25,9 +25,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .securityMatcher("/reservation-system/**")
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/api/user/register", "/api/user/login", "/h2-console/**").permitAll()
+                        auth.requestMatchers("/api/user/register", "/api/user/login", "/h2-console/**"
+                                ,"/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                                 .requestMatchers("/api/reservations/**").authenticated()
                                 .requestMatchers("/api/user/logout").authenticated()
                                 .anyRequest().authenticated()
