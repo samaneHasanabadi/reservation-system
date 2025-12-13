@@ -5,6 +5,7 @@ import ir.azki.reservationsystem.slot.domain.Slot;
 import ir.azki.reservationsystem.slot.domain.SlotRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class UpdateSlotCommandHandler {
     private final SlotRepository slotRepository;
 
     @Transactional
+    @CacheEvict(value = "free-slots", key = "'first'")
     public void handle(Long id, CreateSlotCommand command) {
         Slot slot = slotRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("slot not found with id : " + id));
 

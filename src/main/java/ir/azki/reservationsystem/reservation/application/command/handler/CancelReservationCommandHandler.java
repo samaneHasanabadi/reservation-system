@@ -8,6 +8,7 @@ import ir.azki.reservationsystem.user.domain.User;
 import ir.azki.reservationsystem.user.infrastructure.security.AuthenticatedUserProvider;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.AccessDeniedException;
@@ -21,6 +22,7 @@ public class CancelReservationCommandHandler {
     private final AuthenticatedUserProvider authenticatedUserProvider;
 
     @Transactional
+    @CacheEvict(value = "free-slots", key = "'first'")
     public void handle(Long id) throws AccessDeniedException {
         Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("reservation not found with id : " + id));
         User currentUser = authenticatedUserProvider.getCurrentUser();

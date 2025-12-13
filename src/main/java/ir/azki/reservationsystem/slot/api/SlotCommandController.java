@@ -31,14 +31,14 @@ public class SlotCommandController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Slot is successfully created");
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateBudget(@PathVariable Long id, @Valid @RequestBody CreateSlotRequest request) throws AccessDeniedException {
         CreateSlotCommand command = conversionService.convert(request, CreateSlotCommand.class);
         updateSlotCommandHandler.handle(id, command);
         return ResponseEntity.ok().body("Slot is updated successfully!");
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBudget(@PathVariable Long id) {
         deleteSlotCommandHandler.handle(id);
         return ResponseEntity.ok().body("Slot is deleted successfully!");
